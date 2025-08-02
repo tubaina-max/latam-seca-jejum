@@ -10,20 +10,20 @@ export default function LandingPage() {
   const [currentParams, setCurrentParams] = useState<string>("")
   const router = useRouter()
 
-  // Capturar UTMs no lado do cliente
+  // Capturar UTMs del lado del cliente
   useEffect(() => {
     if (typeof window !== "undefined") {
       setCurrentParams(window.location.search)
     }
   }, [])
 
-  // Função para preservar UTMs na navegação
+  // Función para preservar UTMs en la navegación
   const navigateWithUTMs = (path: string) => {
     if (typeof window === "undefined") return
     const urlParams = new URLSearchParams(window.location.search)
     const utmParams = new URLSearchParams()
 
-    // Preservar todos os parâmetros UTM e outros parâmetros de tracking
+    // Preservar todos los parámetros UTM y otros parámetros de tracking
     const trackingParams = [
       "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
       "gclid", "fbclid", "msclkid", "ttclid",
@@ -42,11 +42,11 @@ export default function LandingPage() {
   }
 
   useEffect(() => {
-    // 🎯 TRACKING UNIFICADO - Aguarda scripts carregarem
+    // 🎯 TRACKING UNIFICADO - Aguarda que se carguen los scripts
     const trackPageView = () => {
       if (typeof window !== "undefined" && window.trackEvent) {
         window.trackEvent('PageView', {
-          page_title: 'Landing Page - Plano A Seca Jejum',
+          page_title: 'Landing Page - Plan A Seca Ayuno',
           page_path: '/',
           content_name: 'Landing Page',
           content_category: 'landing_page',
@@ -55,27 +55,27 @@ export default function LandingPage() {
         });
         console.log("✅ Landing Page - PageView disparado");
       } else {
-        console.log("⏳ Aguardando scripts carregarem...");
+        console.log("⏳ Esperando que se carguen los scripts...");
         setTimeout(trackPageView, 1000);
       }
     };
 
-    // Tentar múltiplas vezes para garantir que scripts carregaram
+    // Intentar múltiples veces para asegurar que los scripts se cargaron
     setTimeout(trackPageView, 500);
     setTimeout(trackPageView, 2000);
     setTimeout(trackPageView, 5000);
 
     // Log UTMs para debug
     if (typeof window !== "undefined" && window.location.search) {
-      console.log("🔗 UTMs capturadas na landing:", window.location.search)
+      console.log("🔗 UTMs capturadas en la landing:", window.location.search)
     }
   }, [])
 
-  // 🎯 FUNÇÃO PARA TRACKING DE CLIQUE NOS CARDS
+  // 🎯 FUNCIÓN PARA TRACKING DE CLIC EN LAS CARDS
   const handleCardClick = (ageRange: string) => {
-    console.log(`🎯 Card clicado: ${ageRange}`);
+    console.log(`🎯 Card clickeada: ${ageRange}`);
     
-    // Disparar evento de clique
+    // Disparar evento de clic
     if (typeof window !== "undefined" && window.trackEvent) {
       window.trackEvent('ViewContent', {
         content_name: `Age Range Selected: ${ageRange}`,
@@ -87,7 +87,7 @@ export default function LandingPage() {
       console.log(`✅ ViewContent disparado para: ${ageRange}`);
     }
     
-    // Pequeno delay para garantir que o evento seja enviado
+    // Pequeño delay para asegurar que el evento se envíe
     setTimeout(() => {
       navigateWithUTMs("/quiz")
     }, 300);
@@ -99,7 +99,7 @@ export default function LandingPage() {
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-md mx-auto px-4 py-3 flex items-center justify-center">
           <Flame className="w-6 h-6 text-orange-500 mr-2" />
-          <span className="text-xl font-bold text-gray-800">Plano A - Seca Jejum</span>
+          <span className="text-xl font-bold text-gray-800">Plan A - Seca Ayuno</span>
         </div>
       </div>
 
@@ -112,11 +112,11 @@ export default function LandingPage() {
         {/* Main content */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-800 mb-4 leading-tight">
-            Descubra seu tipo de
+            Descubre tu tipo de
             <br />
-            <span className="text-green-600">Jejum intermitente</span> ideal
+            <span className="text-green-600">Ayuno intermitente</span> ideal
             <br />
-            <span className="text-green-600">De acordo com a sua idade</span>
+            <span className="text-green-600">De acuerdo a tu edad</span>
           </h1>
         </div>
 
@@ -124,19 +124,19 @@ export default function LandingPage() {
         <div className="space-y-4 mb-8">
           {[
             {
-              range: "18 a 25 anos",
+              range: "18 a 25 años",
               image: "https://nutricaoalimentos.shop/wp-content/uploads/2025/07/descricao-da-pessoa-mulher-jovem-aparent_eDRE4CirR9mF3Y4NLrO4wA_Bb7p_JITQ1anp19qUsfYXg.jpeg",
             },
             {
-              range: "26 a 35 anos",
+              range: "26 a 35 años",
               image: "https://nutricaoalimentos.shop/wp-content/uploads/2025/07/a-soft-natural-light-portrait-photograph_trCRGET_ScCUF5c2P0I-3A__isfdPpeS7CqtoKbFSfoLQ.jpeg",
             },
             {
-              range: "36 a 45 anos",
+              range: "36 a 45 años",
               image: "https://nutricaoalimentos.shop/wp-content/uploads/2025/07/e15d9100-8694-48fe-a365-cda2588c68b6.png",
             },
             {
-              range: "+46 anos",
+              range: "+46 años",
               image: "https://nutricaoalimentos.shop/wp-content/uploads/2025/07/a-soft-diffused-portrait-photograph-capt_x5OFMhVnRYapjNqqMuketQ_KKS67ttqQUaqSJiIIT6xAg.jpeg",
             },
           ].map((option, index) => (
@@ -166,21 +166,21 @@ export default function LandingPage() {
           <div className="flex items-center justify-between text-sm text-gray-600">
             <div className="flex items-center">
               <Users className="w-4 h-4 mr-1 text-green-500" />
-              <span>+15 mil pessoas</span>
+              <span>+15 mil personas</span>
             </div>
             <div className="flex items-center">
               <Clock className="w-4 h-4 mr-1 text-orange-500" />
               <span>2 min para completar</span>
             </div>
           </div>
-          <p className="text-xs text-gray-500 mt-2">nos escolheram, veja o que eles falaram sobre nós...</p>
+          <p className="text-xs text-gray-500 mt-2">nos eligieron, mira lo que dijeron sobre nosotros...</p>
         </div>
 
         {/* Live counter */}
         <div className="text-center mb-6">
           <div className="inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
             <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-            <span className="font-medium">127 pessoas fazendo o teste agora</span>
+            <span className="font-medium">127 personas haciendo el test ahora</span>
           </div>
         </div>
 
@@ -188,8 +188,8 @@ export default function LandingPage() {
         <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-4 text-center">
           <Star className="w-6 h-6 mx-auto mb-2" />
           <p className="text-sm font-medium">
-            ✨ Análise Personalizada GRATUITA ✨<br />
-            <span className="text-green-100">Baseada em mais de 20 fatores únicos</span>
+            ✨ Análisis Personalizado GRATUITO ✨<br />
+            <span className="text-green-100">Basado en más de 20 factores únicos</span>
           </p>
         </div>
       </div>
