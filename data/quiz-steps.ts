@@ -666,7 +666,7 @@ export const quizSteps: QuizStep[] = [
     type: "single-choice",
     options: [{ label: "Continuar", value: "continue" }],
     socialProof: {
-      mainImage: "https://nutricaoalimentos.shop/wp-content/uploads/2025/08/Voce-esta-aqui.png",
+      mainImage: "https://nutricaoalimentos.shop/wp-content/uploads/2025/08/a-mobile-app-interface-designed-for-a-he_AjWN5GwgSL2LKHFQYr_ejw_WYBxKFrATTGuUhLqCl2c6A-e1754109151475.jpeg",
       text: "Tu IMC reveló algo que 9 de cada 10 personas descubren demasiado tarde: estás en la 'Zona de Aceleración Reversa' - donde cada semana perdida hace que la recuperación sea 3 veces más difícil.",
     },
   },
