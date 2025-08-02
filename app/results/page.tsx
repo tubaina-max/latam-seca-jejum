@@ -8,14 +8,14 @@ import { Flame, CheckCircle, Star, Lock, ShieldCheck, Clock, Target } from "luci
 export default function ResultsPage() {
   const [imageProgress, setImageProgress] = useState(50)
 
-  // ✅ Função para preservar UTMs na navegação para checkout
+  // ✅ Función para preservar UTMs en la navegación hacia checkout
   const navigateToCheckoutWithUTMs = (checkoutUrl: string) => {
     if (typeof window === "undefined") return
 
     const currentParams = new URLSearchParams(window.location.search)
     const utmParams = new URLSearchParams()
     
-    // Preservar todos os parâmetros UTM e outros parâmetros de tracking
+    // Preservar todos los parámetros UTM y otros parámetros de tracking
     const trackingParams = [
       'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
       'gclid', 'fbclid', 'msclkid', 'ttclid',
@@ -29,59 +29,59 @@ export default function ResultsPage() {
       }
     })
     
-    // Construir URL final do checkout com UTMs
+    // Construir URL final del checkout con UTMs
     const finalCheckoutUrl = utmParams.toString() 
       ? `${checkoutUrl}?${utmParams.toString()}`
       : checkoutUrl
     
-    // Navegar para o checkout externo
+    // Navegar al checkout externo
     window.location.href = finalCheckoutUrl
   }
 
-  // ✅ USEEFFECT OTIMIZADO - ViewContent quando carrega
+  // ✅ USEEFFECT OPTIMIZADO - ViewContent cuando carga
   useEffect(() => {
-    console.log("📄 Página de resultados carregada");
+    console.log("📄 Página de resultados cargada");
 
-    // 🎯 TRACKING UNIFICADO - ViewContent com retry inteligente
+    // 🎯 TRACKING UNIFICADO - ViewContent con retry inteligente
     const trackResultsPageView = (attempt = 1) => {
-      console.log(`🔄 Tentativa ${attempt} de tracking ViewContent...`);
+      console.log(`🔄 Intento ${attempt} de tracking ViewContent...`);
       
       if (typeof window !== "undefined" && window.trackEvent) {
         window.trackEvent('ViewContent', {
-          content_name: 'Results Page - Plano A Seca Jejum',
+          content_name: 'Results Page - Plan A Seca Ayuno',
           content_category: 'results_page',
           value: 19.90,
           currency: 'BRL',
-          content_ids: ['results-plano-a'],
-          page_title: 'Resultados do Quiz'
+          content_ids: ['results-plan-a'],
+          page_title: 'Resultados del Quiz'
         });
-        console.log("✅ Results Page - ViewContent disparado com sucesso!");
-        return true; // Sucesso
+        console.log("✅ Results Page - ViewContent disparado con éxito!");
+        return true; // Éxito
       } else {
-        console.log(`⏳ Tentativa ${attempt} - Scripts ainda carregando...`);
+        console.log(`⏳ Intento ${attempt} - Scripts aún cargando...`);
         
         // Verificar individualmente cada script
-        console.log("UTMify disponível:", !!window.utmify);
-        console.log("trackEvent disponível:", !!window.trackEvent);
-        console.log("GA disponível:", !!window.gtag);
+        console.log("UTMify disponible:", !!window.utmify);
+        console.log("trackEvent disponible:", !!window.trackEvent);
+        console.log("GA disponible:", !!window.gtag);
         
-        // Tentar novamente se não passou de 10 tentativas
+        // Intentar nuevamente si no pasó de 10 intentos
         if (attempt < 10) {
           setTimeout(() => trackResultsPageView(attempt + 1), 1000);
         } else {
-          console.error("❌ Falha após 10 tentativas - scripts não carregaram");
+          console.error("❌ Falla después de 10 intentos - scripts no cargaron");
         }
         return false;
       }
     };
 
-    // Começar tentativas imediatamente
+    // Comenzar intentos inmediatamente
     trackResultsPageView(1);
     
-    // Backup: tentar novamente após 3 segundos
+    // Backup: intentar nuevamente después de 3 segundos
     setTimeout(() => {
       if (typeof window !== "undefined" && window.trackEvent) {
-        console.log("🔄 Backup tracking após 3s...");
+        console.log("🔄 Backup tracking después de 3s...");
         window.trackEvent('ViewContent', {
           content_name: 'Results Page Backup',
           content_category: 'results_page_backup',
@@ -93,58 +93,58 @@ export default function ResultsPage() {
 
   }, [])
 
-// ✅ FUNÇÃO CORRIGIDA - InitiateCheckout com parâmetros corretos para Facebook
+// ✅ FUNCIÓN CORREGIDA - InitiateCheckout con parámetros correctos para Facebook
 const handleReceivePlan = () => {
-  console.log("🛒 Botão clicado - Preparando InitiateCheckout...");
+  console.log("🛒 Botón clickeado - Preparando InitiateCheckout...");
 
-  // 🎯 TRACKING UNIFICADO - InitiateCheckout com parâmetros Facebook/Meta
+  // 🎯 TRACKING UNIFICADO - InitiateCheckout con parámetros Facebook/Meta
   const trackCheckout = (attempt = 1) => {
-    console.log(`🔄 Tentativa ${attempt} de InitiateCheckout...`);
+    console.log(`�� Intento ${attempt} de InitiateCheckout...`);
     
     if (typeof window !== "undefined" && window.trackEvent) {
-      // Parâmetros otimizados para Facebook/Meta Ads
+      // Parámetros optimizados para Facebook/Meta Ads
       const checkoutData = {
-        content_name: 'Plano A - Seca Jejum',
+        content_name: 'Plan A - Seca Ayuno',
         content_category: 'digital_product',
         content_type: 'product',
-        content_ids: ['plano-a-seca-jejum'],
+        content_ids: ['plan-a-seca-ayuno'],
         contents: [{
-          id: 'plano-a-seca-jejum',
+          id: 'plan-a-seca-ayuno',
           quantity: 1,
           item_price: 19.90
         }],
         value: 19.90,
         currency: 'BRL',
         num_items: 1,
-        // Parâmetros adicionais para Facebook
+        // Parámetros adicionales para Facebook
         predicted_ltv: 19.90,
         event_source_url: window.location.href,
         opt_out: false
       };
 
       window.trackEvent('InitiateCheckout', checkoutData);
-      console.log("✅ InitiateCheckout disparado com parâmetros Facebook:", checkoutData);
+      console.log("✅ InitiateCheckout disparado con parámetros Facebook:", checkoutData);
       
-      // TAMBÉM disparar como Purchase para garantir
+      // TAMBIÉN disparar como Purchase para garantizar
       setTimeout(() => {
         if (window.trackEvent) {
           window.trackEvent('Purchase', {
-            content_name: 'Plano A - Seca Jejum',
+            content_name: 'Plan A - Seca Ayuno',
             content_category: 'digital_product',
             content_type: 'product',
-            content_ids: ['plano-a-seca-jejum'],
+            content_ids: ['plan-a-seca-ayuno'],
             value: 19.90,
             currency: 'BRL',
             transaction_id: 'quiz_' + Date.now(),
             event_source_url: window.location.href
           });
-          console.log("✅ Purchase BACKUP também disparado");
+          console.log("✅ Purchase BACKUP también disparado");
         }
       }, 1000);
       
       return true;
     } else {
-      console.log(`⏳ Tentativa ${attempt} - trackEvent não disponível`);
+      console.log(`⏳ Intento ${attempt} - trackEvent no disponible`);
       
       // Verificar scripts individualmente
       console.log("UTMify:", !!window.utmify);
@@ -153,21 +153,21 @@ const handleReceivePlan = () => {
       if (attempt < 3) {
         setTimeout(() => trackCheckout(attempt + 1), 500);
       } else {
-        console.log("⚠️ Prosseguindo sem tracking após 3 tentativas");
+        console.log("⚠️ Procediendo sin tracking después de 3 intentos");
       }
       return false;
     }
   };
 
-  // Tentar tracking
+  // Intentar tracking
   trackCheckout(1);
 
-  // ✅ REDIRECIONAMENTO (independente do tracking)
-  console.log("⏳ Aguardando 3s para redirecionamento (tempo extra para tracking)...");
+  // ✅ REDIRECCIÓN (independiente del tracking)
+  console.log("⏳ Esperando 3s para redirección (tiempo extra para tracking)...");
   setTimeout(() => {
-    console.log("🚀 Redirecionando para checkout...");
+    console.log("🚀 Redirigiendo a checkout...");
     navigateToCheckoutWithUTMs("https://pay.cakto.com.br/37iud5r_506380");
-  }, 3000); // Aumentei para 3 segundos
+  }, 3000); // Aumenté a 3 segundos
 }
 
   return (
@@ -176,7 +176,7 @@ const handleReceivePlan = () => {
       <div className="bg-gradient-to-r from-green-600 to-green-700 shadow-lg">
         <div className="w-full max-w-md mx-auto px-3 py-3 flex items-center justify-center">
           <Flame className="w-6 h-6 text-yellow-300 mr-2 animate-pulse" />
-          <span className="text-lg font-bold text-white">Plano A - Seca Jejum</span>
+          <span className="text-lg font-bold text-white">Plan A - Seca Ayuno</span>
           <div className="ml-2 bg-yellow-400 text-gray-800 px-2 py-1 rounded-full text-xs font-bold">
             PERSONALIZADO
           </div>
@@ -187,35 +187,35 @@ const handleReceivePlan = () => {
         {/* Título Principal Mobile */}
         <div className="text-center mb-6">
           <div className="bg-red-500 text-white px-3 py-2 rounded-full inline-block mb-3 text-xs font-bold">
-            🔥 PROTOCOLO EXCLUSIVO CRIADO PARA VOCÊ
+            🔥 PROTOCOLO EXCLUSIVO CREADO PARA TI
           </div>
           <h1 className="text-xl font-bold text-gray-800 mb-3 leading-tight">
-            Seu <span className="text-green-600 bg-green-50 px-1 py-1 rounded">protocolo científico</span> está pronto!
+            ¡Tu <span className="text-green-600 bg-green-50 px-1 py-1 rounded">protocolo científico</span> está listo!
             <br />
-            <span className="text-red-600">Perca até 8kg em apenas</span>
+            <span className="text-red-600">Pierde hasta 8kg en solo</span>
             <br />
             <div className="flex items-center justify-center mt-2">
               <Clock className="w-5 h-5 text-red-500 mr-2" />
-              <span className="text-2xl font-black text-red-600">28 DIAS</span>
+              <span className="text-2xl font-black text-red-600">28 DÍAS</span>
             </div>
           </h1>
           <p className="text-gray-600 text-xs">
-            ⚡ Baseado em suas respostas + pesquisas de Harvard e Stanford
+            ⚡ Basado en tus respuestas + investigaciones de Harvard y Stanford
           </p>
         </div>
 
-        {/* Before & After Mobile Otimizado */}
+        {/* Before & After Mobile Optimizado */}
         <div className="relative w-full h-72 mb-6 rounded-xl overflow-hidden shadow-2xl border-4 border-green-400">
-          {/* Imagem ANTES (base) */}
+          {/* Imagen ANTES (base) */}
           <div className="absolute inset-0">
             <img
               src="https://nutricaoalimentos.shop/wp-content/uploads/2025/08/a-photograph-of-a-confident-slender-woma_6pH4Bhx2SOKjY1q47cLqJQ_Bu33yAxDSs67Z6oKXZAotA-1.jpeg"
-              alt="Antes do Plano A"
+              alt="Antes del Plan A"
               className="w-full h-full object-cover object-center"
             />
           </div>
           
-          {/* Imagem DEPOIS (sobreposta com clip-path) */}
+          {/* Imagen DESPUÉS (superpuesta con clip-path) */}
           <div 
             className="absolute inset-0 transition-all duration-300 ease-out"
             style={{ 
@@ -224,12 +224,12 @@ const handleReceivePlan = () => {
           >
             <img
               src="https://nutricaoalimentos.shop/wp-content/uploads/2025/08/a-photograph-of-a-confident-woman-with-w_HJcLKNlRSKKHFm3MIswJ7Q_Bu33yAxDSs67Z6oKXZAotA-1.jpeg"
-              alt="Depois do Plano A"
+              alt="Después del Plan A"
               className="w-full h-full object-cover object-center"
             />
           </div>
 
-          {/* Linha divisória */}
+          {/* Línea divisoria */}
           <div 
             className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-10 transition-all duration-300"
             style={{ left: `${imageProgress}%`, transform: 'translateX(-50%)' }}
@@ -252,20 +252,20 @@ const handleReceivePlan = () => {
             }}
           />
 
-          {/* Labels ANTES/DEPOIS Mobile */}
+          {/* Labels ANTES/DESPUÉS Mobile */}
           <div className="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded-lg text-center text-xs font-bold shadow-lg">
             <p className="mb-1">ANTES</p>
             <p className="text-xs opacity-90">Metabolismo lento</p>
           </div>
           <div className="absolute top-3 right-3 bg-green-500 text-white px-2 py-1 rounded-lg text-center text-xs font-bold shadow-lg">
-            <p className="mb-1">DEPOIS</p>
-            <p className="text-xs opacity-90">28 dias</p>
+            <p className="mb-1">DESPUÉS</p>
+            <p className="text-xs opacity-90">28 días</p>
           </div>
 
           {/* Indicadores inferiores Mobile */}
           <div className="absolute bottom-10 left-3 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs flex items-center">
             <Target className="w-3 h-3 mr-1 text-red-400" />
-            <span>Gordura localizada</span>
+            <span>Grasa localizada</span>
           </div>
           <div className="absolute bottom-10 right-3 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs flex items-center">
             <CheckCircle className="w-3 h-3 mr-1 text-green-400" />
@@ -273,7 +273,7 @@ const handleReceivePlan = () => {
           </div>
         </div>
 
-        {/* CSS para o slider customizado Mobile */}
+        {/* CSS para el slider personalizado Mobile */}
         <style jsx>{`
           .slider::-webkit-slider-thumb {
             appearance: none;
@@ -297,34 +297,34 @@ const handleReceivePlan = () => {
           }
         `}</style>
 
-        {/* ✅ Oferta Principal Mobile - COM INITIATE CHECKOUT OTIMIZADO */}
+        {/* ✅ Oferta Principal Mobile - CON INITIATE CHECKOUT OPTIMIZADO */}
         <Card className="mb-5 border-4 border-green-400 shadow-2xl bg-gradient-to-br from-green-50 to-white">
           <CardContent className="p-4 text-center">
             <div className="bg-red-500 text-white px-3 py-2 rounded-full inline-block mb-3 text-xs font-bold animate-pulse">
-              🚨 ÚLTIMAS VAGAS HOJE
+              🚨 ÚLTIMOS CUPOS HOY
             </div>
             <p className="text-lg font-bold text-gray-800 mb-3">
-              Seu <span className="text-green-600">Plano A - Seca Jejum</span> personalizado está pronto!
+              ¡Tu <span className="text-green-600">Plan A - Seca Ayuno</span> personalizado está listo!
             </p>
             <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-3 mb-3">
-              <p className="text-xs text-gray-700 mb-2">💰 <strong>Investimento normal:</strong> <span className="line-through">R\$ 97,00</span></p>
+              <p className="text-xs text-gray-700 mb-2">💰 <strong>Inversión normal:</strong> <span className="line-through">R\$ 97,00</span></p>
               <div className="flex items-center justify-center mb-2 flex-wrap">
                 <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-                <span className="text-base font-bold text-gray-800">Hoje apenas</span>
+                <span className="text-base font-bold text-gray-800">Hoy solo</span>
               </div>
               <div className="flex items-center justify-center mb-2">
                 <span className="text-sm text-gray-500">4x de</span>
                 <span className="text-2xl font-black text-green-600 ml-1">R\$ 5,77</span>
               </div>
               <p className="text-xs text-green-700 font-semibold">
-                ✅ Ou R\$ 19,90 à vista (79% de desconto)
+                ✅ O R\$ 19,90 al contado (79% de descuento)
               </p>
             </div>
             <Button
               className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-3 px-2 rounded-xl font-bold text-sm shadow-xl transform hover:scale-105 transition-all duration-200 leading-tight"
               onClick={handleReceivePlan}
             >
-              🔥 QUERO MEU PLANO AGORA!
+              🔥 ¡QUIERO MI PLAN AHORA!
             </Button>
             <div className="grid grid-cols-3 gap-2 mt-3 text-xs text-gray-600">
               <div className="flex flex-col items-center">
@@ -333,94 +333,94 @@ const handleReceivePlan = () => {
               </div>
               <div className="flex flex-col items-center">
                 <Star className="w-4 h-4 mb-1 text-green-500" />
-                <span className="text-center">Garantia 30 DIAS</span>
+                <span className="text-center">Garantía 30 DÍAS</span>
               </div>
               <div className="flex flex-col items-center">
                 <Lock className="w-4 h-4 mb-1 text-green-500" />
-                <span className="text-center">Dados PROTEGIDOS</span>
+                <span className="text-center">Datos PROTEGIDOS</span>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Como Funciona Mobile */}
+        {/* Cómo Funciona Mobile */}
         <div className="mb-6">
           <h2 className="text-xl font-bold text-gray-800 mb-3 text-center">
-            🎯 O que você vai receber no <span className="text-green-600">Plano A</span>?
+            🎯 ¿Qué vas a recibir en el <span className="text-green-600">Plan A</span>?
           </h2>
           <p className="text-gray-600 text-xs mb-4 text-center bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
-            <strong>📚 Protocolo científico baseado em Harvard + Stanford</strong><br />
-            Desenvolvido especificamente para seus objetivos e estilo de vida. 
-            Resultados comprovados em <strong>28 dias</strong> sem efeito sanfona.
+            <strong>📚 Protocolo científico basado en Harvard + Stanford</strong><br />
+            Desarrollado específicamente para tus objetivos y estilo de vida. 
+            Resultados comprobados en <strong>28 días</strong> sin efecto rebote.
           </p>
           
           <div className="space-y-3">
             <Card className="p-3 bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-500">
               <p className="font-bold text-gray-800 mb-2 flex items-center text-sm">
                 <span className="bg-green-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0">1</span>
-                Protocolo Seca Jejum Personalizado:
+                Protocolo Seca Ayuno Personalizado:
               </p>
               <p className="text-xs text-gray-700 flex items-start">
                 <CheckCircle className="w-3 h-3 mr-2 mt-1 flex-shrink-0 text-green-500" />
-                Horários exatos de jejum baseados na sua rotina + alimentos que aceleram a queima de gordura. 
-                <strong>Perca até 8kg em 28 dias</strong> sem passar fome ou perder músculos.
+                Horarios exactos de ayuno basados en tu rutina + alimentos que aceleran la quema de grasa. 
+                <strong>Pierde hasta 8kg en 28 días</strong> sin pasar hambre o perder músculos.
               </p>
             </Card>
 
             <Card className="p-3 bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-500">
               <p className="font-bold text-gray-800 mb-2 flex items-center text-sm">
                 <span className="bg-yellow-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0">2</span>
-                Turbinador Metabólico 24h:
+                Turbo Metabólico 24h:
               </p>
               <p className="text-xs text-gray-700 flex items-start">
                 <CheckCircle className="w-3 h-3 mr-2 mt-1 flex-shrink-0 text-green-500" />
-                Estratégias para acelerar seu metabolismo em até 40% e queimar gordura mesmo dormindo. 
-                <strong>Energia de jovem aos 20 anos!</strong>
+                Estrategias para acelerar tu metabolismo hasta un 40% y quemar grasa incluso durmiendo. 
+                <strong>¡Energía de joven a los 20 años!</strong>
               </p>
             </Card>
 
             <Card className="p-3 bg-gradient-to-r from-purple-50 to-pink-50 border-l-4 border-purple-500">
               <p className="font-bold text-gray-800 mb-2 flex items-center text-sm">
                 <span className="bg-purple-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0">3</span>
-                Transformação Espelho em 7 Dias:
+                Transformación Espejo en 7 Días:
               </p>
               <p className="text-xs text-gray-700 flex items-start">
                 <CheckCircle className="w-3 h-3 mr-2 mt-1 flex-shrink-0 text-green-500" />
-                Método exclusivo para desinchar rapidamente e ver resultados no espelho em menos de 1 semana. 
-                <strong>Prepare-se para os elogios!</strong>
+                Método exclusivo para desinflamar rápidamente y ver resultados en el espejo en menos de 1 semana. 
+                <strong>¡Prepárate para los elogios!</strong>
               </p>
             </Card>
 
             <Card className="p-3 bg-gradient-to-r from-red-50 to-pink-50 border-l-4 border-red-500">
               <p className="font-bold text-gray-800 mb-2 flex items-center text-sm">
                 <span className="bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0">4</span>
-                Blindagem Anti-Efeito Sanfona:
+                Blindaje Anti-Efecto Rebote:
               </p>
               <p className="text-xs text-gray-700 flex items-start">
                 <CheckCircle className="w-3 h-3 mr-2 mt-1 flex-shrink-0 text-green-500" />
-                O segredo para manter o peso perdido para sempre. <strong>Nunca mais volte a engordar</strong> 
-                mesmo depois de atingir seu objetivo.
+                El secreto para mantener el peso perdido para siempre. <strong>Nunca más vuelvas a engordar</strong> 
+                incluso después de alcanzar tu objetivo.
               </p>
             </Card>
 
             <Card className="p-3 bg-gradient-to-r from-blue-50 to-cyan-50 border-l-4 border-blue-500">
               <p className="font-bold text-gray-800 mb-2 flex items-center text-sm">
                 <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0">5</span>
-                Kit Motivação Inabalável:
+                Kit Motivación Inquebrantable:
               </p>
               <p className="text-xs text-gray-700 flex items-start">
                 <CheckCircle className="w-3 h-3 mr-2 mt-1 flex-shrink-0 text-green-500" />
-                Metas diárias + protocolo anti-procrastinação + planilha de acompanhamento. 
-                <strong>Mantenha-se motivada todos os dias!</strong>
+                Metas diarias + protocolo anti-procrastinación + planilla de seguimiento. 
+                <strong>¡Mantente motivada todos los días!</strong>
               </p>
             </Card>
           </div>
         </div>
 
-        {/* Depoimentos Mobile */}
+        {/* Testimonios Mobile */}
         <div className="mb-6">
           <h2 className="text-lg font-bold text-gray-800 mb-3 text-center">
-            💬 O que nossas alunas estão falando sobre o <span className="text-green-600">Plano A</span>
+            💬 Lo que nuestras alumnas están diciendo sobre el <span className="text-green-600">Plan A</span>
           </h2>
           <div className="space-y-3">
             {[
@@ -428,33 +428,33 @@ const handleReceivePlan = () => {
                 name: "Marina Silva",
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/05/01.png",
                 rating: 5,
-                title: "8kg em 28 dias! Não acredito! 😱",
-                text: "Gente, eu tô chocada! Segui o Plano A direitinho e em exatos 28 dias perdi 8kg. O melhor é que não passei fome nenhuma vez. O protocolo de jejum é muito inteligente, se adapta perfeitamente à minha rotina de mãe. Já comprei roupas tamanho M! 🥰",
-                days: "há 2 dias"
+                title: "¡8kg en 28 días! ¡No lo puedo creer! 😱",
+                text: "¡Chicas, estoy en shock! Seguí el Plan A al pie de la letra y en exactos 28 días perdí 8kg. Lo mejor es que no pasé hambre ni una sola vez. El protocolo de ayuno es muy inteligente, se adapta perfectamente a mi rutina de mamá. ¡Ya compré ropa talla M! 🥰",
+                days: "hace 2 días"
               },
               {
                 name: "Carla Mendes",
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/05/02.png",
                 rating: 5,
-                title: "Meu marido não para de me elogiar! ❤️",
-                text: "Depois de 3 filhos eu achei que nunca mais ia ter o corpo que eu queria. O Plano A me provou o contrário! Em 3 semanas já eliminei 6kg e a barriga que me incomodava tanto. Meu marido não para de falar que eu tô linda! A autoestima lá em cima! 🔥",
-                days: "há 5 dias"
+                title: "¡Mi esposo no para de elogiarme! ❤️",
+                text: "Después de 3 hijos pensé que nunca más iba a tener el cuerpo que quería. ¡El Plan A me demostró lo contrario! En 3 semanas ya eliminé 6kg y la barriga que tanto me molestaba. ¡Mi esposo no para de decir que estoy hermosa! ¡La autoestima por las nubes! 🔥",
+                days: "hace 5 días"
               },
               {
                 name: "Juliana Costa",
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/05/8db332e349f045c0e1949cb88c6096d4.jpg",
                 rating: 5,
-                title: "Energia de adolescente aos 45 anos! ⚡",
-                text: "O que mais me impressionou não foi só a perda de peso (5kg até agora), mas a ENERGIA! Eu acordo disposta, não tenho mais aquela sonolência da tarde. Parece que voltei aos 20 anos! O protocolo metabólico é incrível mesmo. Vale cada centavo! 💪",
-                days: "há 1 semana"
+                title: "¡Energía de adolescente a los 45 años! ⚡",
+                text: "Lo que más me impresionó no fue solo la pérdida de peso (5kg hasta ahora), sino la ENERGÍA. Despierto con ganas, no tengo más esa somnolencia de la tarde. ¡Parece que volví a los 20 años! El protocolo metabólico es increíble. ¡Vale cada centavo! ��",
+                days: "hace 1 semana"
               },
               {
                 name: "Fernanda Oliveira",
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/06/3-DEPOIMENTO.png",
                 rating: 5,
-                title: "Desinchei em 7 dias como prometido! 🎯",
-                text: "Eu era cética, mas decidi testar. Em 7 dias exatos eu já via diferença no espelho! O inchaço sumiu completamente. Agora com 20 dias já são 4kg a menos e muitos elogios. O plano é muito bem estruturado, fácil de seguir. Recomendo! ✨",
-                days: "há 3 dias"
+                title: "¡Me desinflamé en 7 días como prometieron! 🎯",
+                text: "Era escéptica, pero decidí probar. ¡En 7 días exactos ya veía diferencia en el espejo! La hinchazón desapareció completamente. Ahora con 20 días ya son 4kg menos y muchos elogios. El plan está muy bien estructurado, fácil de seguir. ¡Lo recomiendo! ✨",
+                days: "hace 3 días"
               }
             ].map((testimonial, index) => (
               <Card key={index} className="p-3 shadow-lg border-l-4 border-green-400 bg-gradient-to-r from-green-50 to-white">
@@ -481,47 +481,47 @@ const handleReceivePlan = () => {
           </div>
         </div>
 
-        {/* Imagem de Resultados Mobile */}
+        {/* Imagen de Resultados Mobile */}
         <div className="mb-6 text-center">
           <h2 className="text-lg font-bold text-gray-800 mb-3">
-            📸 Resultados reais em <span className="text-red-600">28 dias</span>
+            📸 Resultados reales en <span className="text-red-600">28 días</span>
           </h2>
           <div className="bg-gradient-to-br from-green-100 to-blue-100 p-4 rounded-xl">
             <img
               src="https://nutricaoalimentos.shop/wp-content/uploads/2025/07/a-split-screen-photograph-showcasing-a-t_5pDfAYkqSfCrofLJyy2sjw_fApRb1upRymgCH44qbW3EQ.jpeg"
-              alt="Transformações reais do Plano A"
+              alt="Transformaciones reales del Plan A"
               className="w-full rounded-lg shadow-xl object-cover border-4 border-white"
             />
             <p className="text-xs text-gray-600 mt-2 font-medium">
-              ⚡ Mais de 15.000 mulheres já transformaram seus corpos
+              ⚡ Más de 15.000 mujeres ya transformaron sus cuerpos
             </p>
           </div>
         </div>
 
-        {/* ✅ Segunda Oferta Mobile - COM INITIATE CHECKOUT OTIMIZADO */}
+        {/* ✅ Segunda Oferta Mobile - CON INITIATE CHECKOUT OPTIMIZADO */}
         <Card className="mb-5 border-4 border-red-400 shadow-2xl bg-gradient-to-br from-red-50 to-yellow-50">
           <CardContent className="p-4 text-center">
             <div className="bg-red-500 text-white px-3 py-2 rounded-full inline-block mb-3 text-xs font-bold animate-bounce">
-              ⏰ OFERTA EXPIRA EM BREVE!
+              ⏰ ¡OFERTA EXPIRA PRONTO!
             </div>
             <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-3 mb-3">
               <div className="flex items-center justify-center mb-2 flex-wrap">
                 <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-                <span className="text-base font-bold text-gray-800">Últimas vagas</span>
+                <span className="text-base font-bold text-gray-800">Últimos cupos</span>
               </div>
               <div className="flex items-center justify-center mb-2">
-                <span className="text-sm text-gray-500">4x de apenas</span>
+                <span className="text-sm text-gray-500">4x de solo</span>
                 <span className="text-2xl font-black text-green-600 ml-1">R\$ 5,77</span>
               </div>
               <p className="text-xs text-green-700 font-semibold">
-                💳 Ou R\$ 19,90 à vista (desconto de 79%)
+                💳 O R\$ 19,90 al contado (descuento del 79%)
               </p>
             </div>
             <Button
               className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-3 px-2 rounded-xl font-bold text-sm shadow-xl transform hover:scale-105 transition-all duration-200 animate-pulse leading-tight"
               onClick={handleReceivePlan}
             >
-              🚨 GARANTIR MINHA VAGA AGORA!
+              🚨 ¡ASEGURAR MI CUPO AHORA!
             </Button>
             <div className="grid grid-cols-3 gap-2 mt-3 text-xs text-gray-600">
               <div className="flex flex-col items-center">
@@ -530,68 +530,68 @@ const handleReceivePlan = () => {
               </div>
               <div className="flex flex-col items-center">
                 <Star className="w-4 h-4 mb-1 text-green-500" />
-                <span className="text-center">Garantia 30 DIAS</span>
+                <span className="text-center">Garantía 30 DÍAS</span>
               </div>
               <div className="flex flex-col items-center">
                 <Lock className="w-4 h-4 mb-1 text-green-500" />
-                <span className="text-center">Dados PROTEGIDOS</span>
+                <span className="text-center">Datos PROTEGIDOS</span>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Garantia Mobile */}
+        {/* Garantía Mobile */}
         <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-xl p-4 mb-6 shadow-lg border-2 border-blue-200 text-center">
           <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3 text-lg font-bold">
             30
-            <span className="text-xs ml-1">DIAS</span>
+            <span className="text-xs ml-1">DÍAS</span>
           </div>
           <h3 className="text-lg font-bold text-gray-800 mb-2">
-            🛡️ Garantia Blindada de Resultados
+            🛡️ Garantía Blindada de Resultados
           </h3>
           <p className="text-gray-700 text-xs mb-3 leading-relaxed">
-            <strong>Teste o Plano A por 30 dias completos.</strong> Se você não perder pelo menos 4kg 
-            ou não ficar 100% satisfeita com os resultados, devolvemos todo seu dinheiro. 
-            <strong>Sem perguntas, sem burocracia.</strong>
+            <strong>Prueba el Plan A por 30 días completos.</strong> Si no pierdes al menos 4kg 
+            o no quedas 100% satisfecha con los resultados, te devolvemos todo tu dinero. 
+            <strong>Sin preguntas, sin burocracia.</strong>
           </p>
           <p className="text-blue-600 text-xs font-semibold">
-            📧 Suporte: <a href="mailto:secaplanoa@gmail.com" className="underline break-all">
+            📧 Soporte: <a href="mailto:secaplanoa@gmail.com" className="underline break-all">
               secaplanoa@gmail.com
             </a>
           </p>
         </div>
 
-        {/* Depoimentos Adicionais Mobile */}
+        {/* Testimonios Adicionales Mobile */}
         <div className="mb-6">
           <div className="space-y-3">
             {[
               {
-                name: "Patrícia Alves",
+                name: "Patricia Alves",
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/06/1-DEPOIMENTO.png",
                 rating: 5,
-                text: "Incrível! 6kg em 3 semanas e sem aquela fome desesperadora que eu sentia em outras dietas. O protocolo é muito inteligente! 🤩",
-                days: "há 4 dias"
+                text: "¡Increíble! 6kg en 3 semanas y sin esa hambre desesperante que sentía en otras dietas. ¡El protocolo es muy inteligente! 🤩",
+                days: "hace 4 días"
               },
               {
                 name: "Roberta Lima",
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/06/2fc1e47b2931f00666611ff2960c9c3f.jpg",
                 rating: 5,
-                text: "Meninas, funciona mesmo! Já eliminei 7kg e o melhor: não voltei a ganhar peso. O anti-efeito sanfona é real! 💪",
-                days: "há 1 semana"
+                text: "¡Chicas, funciona de verdad! Ya eliminé 7kg y lo mejor: no volví a ganar peso. ¡El anti-efecto rebote es real! 💪",
+                days: "hace 1 semana"
               },
               {
                 name: "Camila Santos",
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/06/2-DEPOIMENTO.png",
                 rating: 5,
-                text: "Comprei ontem e já comecei hoje! As orientações são super claras e fáceis de seguir. Ansiosa pelos resultados! 🔥",
-                days: "há 1 dia"
+                text: "¡Compré ayer y ya empecé hoy! Las orientaciones son súper claras y fáciles de seguir. ¡Ansiosa por los resultados! 🔥",
+                days: "hace 1 día"
               },
               {
                 name: "Luciana Ferreira",
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/06/4-DEPOIMENTO.png",
                 rating: 5,
-                text: "Melhor investimento que já fiz! R\$ 19,90 que mudaram minha vida. 5kg a menos e muito mais disposição! ⚡",
-                days: "há 6 dias"
+                text: "¡La mejor inversión que he hecho! R\$ 19,90 que cambiaron mi vida. 5kg menos y mucha más disposición! ⚡",
+                days: "hace 6 días"
               }
             ].map((testimonial, index) => (
               <Card key={index} className="p-3 shadow-md border-l-4 border-blue-400 bg-gradient-to-r from-blue-50 to-white">
@@ -617,18 +617,18 @@ const handleReceivePlan = () => {
           </div>
         </div>
 
-        {/* ✅ CTA Final Mobile - COM INITIATE CHECKOUT OTIMIZADO */}
+        {/* ✅ CTA Final Mobile - CON INITIATE CHECKOUT OPTIMIZADO */}
         <div className="bg-gradient-to-br from-green-600 to-green-700 rounded-xl p-4 text-center text-white mb-4">
-          <h3 className="text-lg font-bold mb-2">🎯 Sua transformação começa HOJE!</h3>
+          <h3 className="text-lg font-bold mb-2">🎯 ¡Tu transformación comienza HOY!</h3>
           <p className="text-xs mb-3 opacity-90">
-            Junte-se às mais de 15.000 mulheres que já transformaram seus corpos com o Plano A
+            Únete a las más de 15.000 mujeres que ya transformaron sus cuerpos con el Plan A
           </p>
           <div className="w-full">
             <Button
               className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-800 py-3 px-2 rounded-xl font-bold text-sm shadow-xl transform hover:scale-105 transition-all duration-200 leading-tight break-words"
               onClick={handleReceivePlan}
             >
-              🔥 COMEÇAR MINHA TRANSFORMAÇÃO AGORA!
+              🔥 ¡COMENZAR MI TRANSFORMACIÓN AHORA!
             </Button>
           </div>
         </div>
