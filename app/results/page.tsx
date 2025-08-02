@@ -93,7 +93,7 @@ export default function ResultsPage() {
 
   }, [])
 
-// ✅ FUNCIÓN CORREGIDA - InitiateCheckout con parámetros correctos para Facebook
+// ✅ FUNCIÓN CORREGIDA - InitiateCheckout SOLAMENTE (Purchase removido)
 const handleReceivePlan = () => {
   console.log("🛒 Botón clickeado - Preparando InitiateCheckout...");
 
@@ -124,23 +124,6 @@ const handleReceivePlan = () => {
 
       window.trackEvent('InitiateCheckout', checkoutData);
       console.log("✅ InitiateCheckout disparado con parámetros Facebook:", checkoutData);
-      
-      // TAMBIÉN disparar como Purchase para garantizar
-      setTimeout(() => {
-        if (window.trackEvent) {
-          window.trackEvent('Purchase', {
-            content_name: 'Plan A - Seca Ayuno',
-            content_category: 'digital_product',
-            content_type: 'product',
-            content_ids: ['plan-a-seca-ayuno'],
-            value: 19.90,
-            currency: 'BRL',
-            transaction_id: 'quiz_' + Date.now(),
-            event_source_url: window.location.href
-          });
-          console.log("✅ Purchase BACKUP también disparado");
-        }
-      }, 1000);
       
       return true;
     } else {
@@ -445,7 +428,7 @@ const handleReceivePlan = () => {
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/05/8db332e349f045c0e1949cb88c6096d4.jpg",
                 rating: 5,
                 title: "¡Energía de adolescente a los 45 años! ⚡",
-                text: "Lo que más me impresionó no fue solo la pérdida de peso (5kg hasta ahora), sino la ENERGÍA. Despierto con ganas, no tengo más esa somnolencia de la tarde. ¡Parece que volví a los 20 años! El protocolo metabólico es increíble. ¡Vale cada centavo! ��",
+                text: "Lo que más me impresionó no fue solo la pérdida de peso (5kg hasta ahora), sino la ENERGÍA. Despierto con ganas, no tengo más esa somnolencia de la tarde. ¡Parece que volví a los 20 años! El protocolo metabólico es increíble. ¡Vale cada centavo! 💪",
                 days: "hace 1 semana"
               },
               {
