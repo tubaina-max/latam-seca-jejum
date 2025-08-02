@@ -166,7 +166,7 @@ const handleReceivePlan = () => {
   console.log("⏳ Esperando 3s para redirección (tiempo extra para tracking)...");
   setTimeout(() => {
     console.log("🚀 Redirigiendo a checkout...");
-    navigateToCheckoutWithUTMs("https://pay.cakto.com.br/37iud5r_506380");
+    navigateToCheckoutWithUTMs("https://pay.hotmart.com/N101152042X?checkoutMode=10");
   }, 3000); // Aumenté a 3 segundos
 }
 
