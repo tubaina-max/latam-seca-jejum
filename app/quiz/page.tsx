@@ -20,14 +20,14 @@ export default function QuizPage() {
   
   const router = useRouter()
 
-  // ✅ Função para preservar UTMs na navegação
+  // ✅ Función para preservar UTMs en la navegación
   const navigateWithUTMs = (path: string) => {
     if (typeof window === "undefined") return
 
     const currentParams = new URLSearchParams(window.location.search)
     const utmParams = new URLSearchParams()
     
-    // Preservar todos os parâmetros UTM e outros parâmetros de tracking
+    // Preservar todos los parámetros UTM y otros parámetros de tracking
     const trackingParams = [
       'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
       'gclid', 'fbclid', 'msclkid', 'ttclid',
@@ -48,7 +48,7 @@ export default function QuizPage() {
     router.push(finalUrl)
   }
 
-  // ✅ USEEFFECT OTIMIZADO - SEM SCRIPTS DUPLICADOS
+  // ✅ USEEFFECT OPTIMIZADO - SIN SCRIPTS DUPLICADOS
   useEffect(() => {
     const currentQuizStep = quizSteps[currentStep]
     if (currentQuizStep.type === "slider" && currentQuizStep.defaultValue) {
@@ -73,7 +73,7 @@ export default function QuizPage() {
     }
   }, [currentStep])
 
-  // Simulate live users counter
+  // Simular contador de usuarios en vivo
   useEffect(() => {
     const interval = setInterval(() => {
       setLiveUsers((prev) => prev + Math.floor(Math.random() * 3) - 1)
@@ -84,7 +84,7 @@ export default function QuizPage() {
   const currentQuizStep = quizSteps[currentStep]
   const progress = ((currentStep + 1) / quizSteps.length) * 100
 
-  // ✅ FUNÇÃO OTIMIZADA - handleAnswer
+  // ✅ FUNCIÓN OPTIMIZADA - handleAnswer
   const handleAnswer = (questionId: string, answer: any) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }))
 
@@ -129,7 +129,7 @@ export default function QuizPage() {
       setCurrentStep((prev) => prev + 1)
       setSelectedMultiple([])
     } else {
-      // ✅ QUIZ COMPLETO - Disparar evento e navegar
+      // ✅ QUIZ COMPLETO - Disparar evento y navegar
       setShowFinalLoading(true)
       
       // 🎯 TRACKING - Quiz Completed
@@ -168,7 +168,7 @@ export default function QuizPage() {
             <p className="text-gray-600 leading-relaxed">{currentQuizStep.insight}</p>
             <div className="mt-6">
               <div className="animate-spin w-6 h-6 border-2 border-green-500 border-t-transparent rounded-full mx-auto"></div>
-              <p className="text-sm text-gray-500 mt-2">Analisando sua resposta...</p>
+              <p className="text-sm text-gray-500 mt-2">Analizando tu respuesta...</p>
             </div>
           </div>
         </div>
@@ -185,7 +185,7 @@ export default function QuizPage() {
               <Flame className="w-10 h-10 text-green-600" />
             </div>
 
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Criando o seu Plano Personalizado de Jejum</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Creando tu Plan Personalizado de Ayuno</h2>
 
             <div className="w-full bg-gray-200 rounded-full h-3 mb-6">
               <div
@@ -196,11 +196,11 @@ export default function QuizPage() {
 
             <p className="text-lg font-semibold text-gray-700 mb-2">94%</p>
             <p className="text-gray-600 mb-6">Finalizando...</p>
-            <p className="text-sm text-gray-500">Analisando suas 39 respostas para criar seu protocolo único de jejum intermitente...</p>
+            <p className="text-sm text-gray-500">Analizando tus 39 respuestas para crear tu protocolo único de ayuno intermitente...</p>
 
             <div className="mt-8 p-4 bg-green-50 rounded-lg">
-              <p className="text-lg font-bold text-gray-800 mb-2">+15 mil mulheres</p>
-              <p className="text-sm text-gray-600">já transformaram seus corpos com nossos planos personalizados...</p>
+              <p className="text-lg font-bold text-gray-800 mb-2">+15 mil mujeres</p>
+              <p className="text-sm text-gray-600">ya transformaron sus cuerpos con nuestros planes personalizados...</p>
             </div>
           </div>
         </div>
@@ -218,7 +218,7 @@ export default function QuizPage() {
           </button>
           <div className="flex items-center">
             <Flame className="w-6 h-6 text-orange-500 mr-2" />
-            <span className="text-xl font-bold text-gray-800">Plano A - Seca Jejum</span>
+            <span className="text-xl font-bold text-gray-800">Plan A - Seca Ayuno</span>
           </div>
           <div className="w-9"></div>
         </div>
@@ -235,11 +235,11 @@ export default function QuizPage() {
           </div>
           <div className="flex justify-between items-center mt-2">
             <span className="text-sm text-gray-600">
-              Etapa {currentStep + 1} de {quizSteps.length}
+              Paso {currentStep + 1} de {quizSteps.length}
             </span>
             <div className="flex items-center text-sm text-green-600">
               <Sparkles className="w-4 h-4 mr-1" />
-              <span>Análise gratuita</span>
+              <span>Análisis gratuito</span>
             </div>
           </div>
         </div>
@@ -248,7 +248,7 @@ export default function QuizPage() {
         <div className="text-center mb-6">
           <div className="inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
             <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-            <span>{liveUsers} pessoas fazendo agora</span>
+            <span>{liveUsers} personas haciéndolo ahora</span>
           </div>
         </div>
 
@@ -265,7 +265,7 @@ export default function QuizPage() {
                 {currentQuizStep.socialProof.mainImage && (
                   <img
                     src={currentQuizStep.socialProof.mainImage || "/placeholder.svg"}
-                    alt="Prova social principal"
+                    alt="Prueba social principal"
                     className="w-full h-auto object-contain rounded-lg mb-3"
                   />
                 )}
@@ -279,7 +279,7 @@ export default function QuizPage() {
                     >
                       <img
                         src={imgSrc || "/placeholder.svg"}
-                        alt={`Prova social secundária ${idx + 1}`}
+                        alt={`Prueba social secundaria ${idx + 1}`}
                         className="absolute inset-0 w-full h-full object-contain rounded-lg"
                       />
                     </div>
@@ -323,7 +323,7 @@ export default function QuizPage() {
               {Object.entries(
                 currentQuizStep.options?.reduce(
                   (acc, option) => {
-                    const category = option.category || "Outros"
+                    const category = option.category || "Otros"
                     if (!acc[category]) {
                       acc[category] = { emoji: option.categoryEmoji, options: [] }
                     }
@@ -439,10 +439,10 @@ export default function QuizPage() {
           <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg p-4 text-center mb-6">
             <TrendingUp className="w-5 h-5 mx-auto mb-2" />
             <p className="text-sm font-medium">
-              🎯 Sua análise está ficando mais precisa!
+              🎯 ¡Tu análisis se está volviendo más preciso!
               <br />
               <span className="text-blue-100">
-                Dados coletados: {currentStep + 1}/{quizSteps.length}
+                Datos recolectados: {currentStep + 1}/{quizSteps.length}
               </span>
             </p>
           </div>
@@ -457,9 +457,9 @@ export default function QuizPage() {
               </div>
               <div>
                 <p className="text-sm text-gray-700 italic">
-                  "Este teste mudou minha vida! Finalmente entendi meu corpo."
+                  "¡Este test cambió mi vida! Finalmente entendí mi cuerpo."
                 </p>
-                <p className="text-xs text-gray-500 mt-1">- Maria, 34 anos</p>
+                <p className="text-xs text-gray-500 mt-1">- María, 34 años</p>
               </div>
             </div>
           </div>
