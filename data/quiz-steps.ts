@@ -146,7 +146,7 @@ export const quizSteps: QuizStep[] = [
     type: "single-choice",
     options: [{ label: "Continuar", value: "continue" }],
     socialProof: {
-      mainImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Body-B9juEAuPht5oSTMhtLtLbJLR1xeKMb.png",
+      mainImage: "https://nutricaoalimentos.shop/wp-content/uploads/2025/08/latam.png",
       secondaryImages: [
         "https://nutricaoalimentos.shop/wp-content/uploads/2025/07/blue-gradient-travel-Presentation-169.png",
       ],
