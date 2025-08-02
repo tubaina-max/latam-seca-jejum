@@ -307,17 +307,17 @@ const handleReceivePlan = () => {
               ¡Tu <span className="text-green-600">Plan A - Seca Ayuno</span> personalizado está listo!
             </p>
             <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-3 mb-3">
-              <p className="text-xs text-gray-700 mb-2">💰 <strong>Inversión normal:</strong> <span className="line-through">R\$ 97,00</span></p>
+              <p className="text-xs text-gray-700 mb-2">💰 <strong>Inversión normal:</strong> <span className="line-through">$ 67</span></p>
               <div className="flex items-center justify-center mb-2 flex-wrap">
                 <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
                 <span className="text-base font-bold text-gray-800">Hoy solo</span>
               </div>
               <div className="flex items-center justify-center mb-2">
                 <span className="text-sm text-gray-500">4x de</span>
-                <span className="text-2xl font-black text-green-600 ml-1">R\$ 5,77</span>
+                <span className="text-2xl font-black text-green-600 ml-1"> $14</span>
               </div>
               <p className="text-xs text-green-700 font-semibold">
-                ✅ O R\$ 19,90 al contado (79% de descuento)
+                ✅ (79% de descuento)
               </p>
             </div>
             <Button
@@ -511,10 +511,10 @@ const handleReceivePlan = () => {
               </div>
               <div className="flex items-center justify-center mb-2">
                 <span className="text-sm text-gray-500">4x de solo</span>
-                <span className="text-2xl font-black text-green-600 ml-1">R\$ 5,77</span>
+                <span className="text-2xl font-black text-green-600 ml-1">$14</span>
               </div>
               <p className="text-xs text-green-700 font-semibold">
-                💳 O R\$ 19,90 al contado (descuento del 79%)
+                💳 (descuento del 79%)
               </p>
             </div>
             <Button
@@ -590,7 +590,7 @@ const handleReceivePlan = () => {
                 name: "Luciana Ferreira",
                 avatar: "https://optimalhealthscout.shop/wp-content/uploads/2025/06/4-DEPOIMENTO.png",
                 rating: 5,
-                text: "¡La mejor inversión que he hecho! R\$ 19,90 que cambiaron mi vida. 5kg menos y mucha más disposición! ⚡",
+                text: "¡La mejor inversión que he hecho! $14 que cambiaron mi vida. 5kg menos y mucha más disposición! ⚡",
                 days: "hace 6 días"
               }
             ].map((testimonial, index) => (
