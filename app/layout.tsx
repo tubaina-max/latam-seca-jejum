@@ -23,7 +23,7 @@ export default function RootLayout({
         <Script id="utmify-pixel-script" strategy="afterInteractive">
           {`
             console.log("🔄 Carregando UTMify...");
-            window.pixelId = "688bd76d39249d6f834ff133";
+            window.pixelId = "688d98903359cfa9f8c464e5";
             
             // 🚀 FUNÇÃO GLOBAL DE TRACKING UNIFICADO - VERSÃO FACEBOOK OTIMIZADA
 window.trackEvent = function(eventName, eventData = {}) {
@@ -111,13 +111,13 @@ window.trackEvent = function(eventName, eventData = {}) {
         />
 
         {/* 📈 GOOGLE ANALYTICS */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-GVND5XYZ4T" />
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-D2CLEEGLQB" />
         <Script id="ga-config" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-GVND5XYZ4T');
+            gtag('config', 'G-D2CLEEGLQB');
             console.log("✅ GA configurado");
           `}
         </Script>
